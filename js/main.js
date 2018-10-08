@@ -5,12 +5,38 @@
       // 全局增加样式
       globalConfig();
       if (request.action == 'send') {
-        addborder($('body'));
+        var $document = $(document);
+        $('body').append('<div class="rt-clipper-border rt_top_hook"></div>');
+        $('body').append('<div class="rt-clipper-border rt_right_hook"></div>');
+        $('body').append('<div class="rt-clipper-border rt_bottom_hook"></div>');
+        $('body').append('<div class="rt-clipper-border rt_left_hook"></div>');
+        $document.on('mouseover',mouseOverHandler);
+        $document.on('mouseout',mouseOutHandler);
+        // addborder($('body'));
         sendResponse({state: '关键词填写成功！'});
       }
 
     }
   );
+
+  /**
+   * 如果直接在原有元素上增加border，或设置postion：relative
+   * 可能会导致页面混乱，故构建一个div
+   * 但构建的div会影响选择内部元素，故构建一个上下左右的border
+   * @param e
+   */
+  function mouseOverHandler(e) {
+    var _rect = e.target.getBoundingClientRect();
+    var options = {
+      'top': _rect.top,
+      'left': _rect.left,
+      'height': _rect.height,
+      'width': _rect.width
+    };
+    $('.rt-clipper-box').css(options);
+  }
+  function mouseOutHandler(e) {
+  }
   function globalConfig() {
     var $body = $('body');
     var $script = $('script');
