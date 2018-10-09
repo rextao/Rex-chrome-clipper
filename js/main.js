@@ -2,6 +2,11 @@
   var pageHelper = undefined;
   chrome.runtime.onMessage.addListener(
     function (request) {
+      if (request.action === 'autoClipper' ){
+        tools.openMessage('!!!!!!!!!!!!!');
+        var autoClipper = new AutoClipper();
+        autoClipper.init();
+      }
       if (request.action === 'startClip' ) {
         if(!pageHelper){
           tools.openMessage('巴扎黑Clipper启动');

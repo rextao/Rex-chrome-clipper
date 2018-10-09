@@ -11,20 +11,24 @@
             display: inline-block;
             width: 48%;
         }
-        #preProcessBtn{
+        #preProcessBtn, #autoClipper{
             width: 100%;
         }
     </style>
 </head>
 <body>
-<div class="popup">
+<div class="popup" id="popup">
+    <p>
+        <!--直接获取主流博客网站-->
+        <button id="autoClipper">自动剪辑</button>
+    </p>
     <p>
         <!--未使用checkbox，popup是一个页面关闭后无法保留状态，为简便-->
         <!--未使用background.html-->
-        <button id="startClipBtn">启用剪辑</button>
-        <button id="destoryClipBtn">禁用剪辑</button>
+        <button id="startClip">启用剪辑</button>
+        <button id="destoryClip">禁用剪辑</button>
     </p>
-    <p><button id="preProcessBtn">处理已剪辑内容</button></p>
+    <p><button id="preProcess">处理已剪辑内容</button></p>
 </div>
 <script src="lib/jquery.3.3.1.min.js"></script>
 <script src="js/pop.min.js"></script>
