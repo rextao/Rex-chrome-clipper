@@ -3,7 +3,6 @@
   chrome.runtime.onMessage.addListener(
     function (request) {
       if (request.action === 'autoClipper' ){
-        tools.openMessage('!!!!!!!!!!!!!');
         var autoClipper = new AutoClipper();
         autoClipper.init();
       }
