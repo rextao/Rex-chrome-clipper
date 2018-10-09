@@ -29,6 +29,12 @@
     background-color: #f56c6c;
     border-color: #f56c6c;
 }
+.rt-clipper-hide-hook{
+    visibility:hidden;
+}
+.rt-clipper-show-hook{
+    visibility:visible !important;
+}
 /*tools.js中使用*/
 /*消息提醒，copy-ele样式*/
 .rt-message{
