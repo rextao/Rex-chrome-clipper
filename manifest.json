@@ -1,8 +1,8 @@
 {
-  "name": "html保存到本地",
+  "name": "巴扎黑Clipper",
   "manifest_version":2,
-  "version": "1.0",
-  "description": "为html添加注释后保存到本地",
+  "version": "1.0.0",
+  "description": "选择页面内容进行剪辑并保存",
   "browser_action": {
     "default_icon": "icon.png" ,
     "default_title": "rextao",
@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["lib/jquery.3.3.1.min.js","js/main.min.js"],
+      "js": ["lib/jquery.3.3.1.min.js","js/main.min.js","js/pageHelper.min.js"],
       "css": ["css/main.min.css"],
       "run_at": "document_start"
     }
