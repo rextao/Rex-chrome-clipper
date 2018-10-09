@@ -3,14 +3,21 @@
     return;
   }
   var tools = {};
+  /**
+   * 消息提醒，但似乎有问题-。-
+   * 不能单独删除
+   * @param msg
+   * @param type
+   */
   tools.openMessage = function (msg, type) {
     if (!msg) {
       return;
     }
-    var html = '<div class="rt-message ' + (type || 'success') + '" >' + msg + '</div>';
+    var id = 'rtMsg'+ Math.ceil((Math.random() * 1000000));
+    var html = '<div id="'+id+'" class="rt-message ' + (type || 'success') + '" >' + msg + '</div>';
     $('body').append(html);
     setTimeout(function () {
-      $('.rt-message').remove();
+      $('#'+id).remove();
     }, 3000);
   };
 
