@@ -7,7 +7,7 @@ var AutoClipper =function () {
     var $article = $('article');
     var $header = $article.find('header');
     var $headerNext = $header.next();
-    if(!$article && !$header && !$headerNext){
+    if($article.length === 0 || $header.length === 0  || $headerNext.length === 0){
       tools.openMessage('未成功剪辑知乎页面！！','error');
       return;
     }
