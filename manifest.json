@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["lib/jquery.3.3.1.min.js","js/main.min.js","js/pageHelper.min.js","js/preProcess.js"],
+      "js": ["lib/jquery.3.3.1.min.js","js/main.min.js","js/pageHelper.min.js","js/preProcess.js","js/tools.min.js"],
       "css": ["css/main.min.css"],
       "run_at": "document_start"
     }
