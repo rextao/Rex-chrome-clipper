@@ -4,36 +4,33 @@
  */
 var PreProcess = function () {
 
-  function a() {
+  function processClipper() {
     var $rtClipperSave = $('.rt-clipper-save-hook');
     if($rtClipperSave.length === 0 ){
-      tools.openMessage('无剪辑内容，无需处理');
+      tools.openMessage('无剪辑内容，无需处理','error');
       return;
     }
     $rtClipperSave.each(function () {
-      var $siblings = $(this).siblings();
-      $siblings.hide();
-      $siblings.addClass('rt-clipper-hide-hook');
-      hideSiblingsToBody($(this));
-    })
-
+      addClipperShowToBody($(this));
+    });
   }
 
   /**
-   * 隐藏当前元素的同辈元素，父级的同辈元素，再父级的同辈元素
-   * 直到body
+   * 递归到body元素
+   * 为当前元素增加rt-clipper-show-hook，siblings增加rt-clipper-hide-hook
+   * 然后利用样式! important
+   * @param $el
    */
-  function hideSiblingsToBody($el) {
-    if($el.parent()[0].tagName === 'BODY'){
+  function addClipperShowToBody($el) {
+    if($el[0].tagName === 'BODY'){
       return;
     }
-    var $siblings =$el.parent().siblings().not('.rt-clipper-save-hook');
-    $siblings.hide();
-    $siblings.addClass('rt-clipper-hide-hook');
-    return hideSiblingsToBody($el.parent());
+    $el.addClass('rt-clipper-show-hook');
+    $el.siblings().not('.rt-clipper-border').addClass('rt-clipper-hide-hook');
+    return addClipperShowToBody($el.parent())
   }
   this.init = function () {
     tools.openMessage('begin','error');
-    a();
+    processClipper();
   }
 };
