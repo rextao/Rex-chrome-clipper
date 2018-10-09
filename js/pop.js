@@ -1,31 +1,16 @@
 (function(){
-  $('#startClipBtn').on('click',function () {
+  $('#popup').on('click',function (e) {
+    var id = e.target.id;
+    // 如点击的不是button
+    if(!id || id ==='popup'){
+      return;
+    }
     chrome.tabs.query({active:true, currentWindow:true}, function (tab) {//获取当前tab
       //向tab发送请求
       chrome.tabs.sendMessage(tab[0].id, {
-        action: "startClip"
+        action: id
       }, function (response) {
       });
     });
   });
-  $('#destoryClipBtn').on('click',function () {
-    chrome.tabs.query({active:true, currentWindow:true}, function (tab) {//获取当前tab
-      //向tab发送请求
-      chrome.tabs.sendMessage(tab[0].id, {
-        action: "destoryClip"
-      }, function (response) {
-      });
-    });
-  });
-
-
-  $('#preProcessBtn').on('click',function () {
-    chrome.tabs.query({active:true, currentWindow:true}, function (tab) {//获取当前tab
-      //向tab发送请求
-      chrome.tabs.sendMessage(tab[0].id, {
-        action: "preProcess"
-      }, function (response) {
-      });
-    });
-  })
 })();
