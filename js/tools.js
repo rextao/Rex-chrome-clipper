@@ -1,5 +1,5 @@
 (function (w) {
-  if (!w.tools) {
+  if (!!w.tools) {
     return;
   }
   var tools = {};
