@@ -26,11 +26,11 @@ var PreProcess = function () {
       return;
     }
     $el.addClass('rt-clipper-show-hook');
-    $el.siblings().not('.rt-clipper-border').addClass('rt-clipper-hide-hook');
+    // siblings元素要删除,鼠标移动生成rect的rt-clipper-border，与message相关的rt-message
+    $el.siblings().not('.rt-clipper-border').not('.rt-message').addClass('rt-clipper-hide-hook');
     return addClipperShowToBody($el.parent())
   }
   this.init = function () {
-    tools.openMessage('begin','error');
     processClipper();
   }
 };
