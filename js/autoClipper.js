@@ -16,7 +16,18 @@ var AutoClipper =function () {
     $headerNext.nextAll().remove();
     preProcess.init();
   };
-
+  // https://blog.csdn.net/*
+  hostMap['blog_csdn'] = function () {
+    tools.openMessage('当前为csdn blog页面');
+    var $main = $('main');
+    var blogContentBox = $main.find('.blog-content-box');
+    $main.width('100%');
+    blogContentBox.addClass('rt-clipper-save-hook');
+    // 删除无用的空白
+    blogContentBox.nextAll().remove();
+    $main.nextAll().remove();
+    preProcess.init();
+  };
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
    * zhihu.com这样的字符串无法作为关键字
@@ -27,20 +38,21 @@ var AutoClipper =function () {
     if(key.indexOf('_') === -1){
       return key;
     }else {
-      key.replace(/_/g,'.')
+      return key.replace(/_/g,'.')
     }
   }
   function autoClipper() {
     var hostname = document.location.hostname;
     for(var key in hostMap){
-      key = keyConvert(key);
-      if(hostname.indexOf(key) !== -1){
+      var convertKey = keyConvert(key);
+      if(hostname.indexOf(convertKey) !== -1){
         hostMap[key]();
         return;
       }
     }
+    tools.openMessage('似乎未剪辑成功','error');
   }
   this.init = function () {
-    autoClipper()
+    autoClipper();
   }
 };
