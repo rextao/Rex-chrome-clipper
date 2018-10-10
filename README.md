@@ -8,3 +8,5 @@
 1. 此插件用于直接划重点，安装后，直接在选中文本后右键即可划重点
 ## 推荐沉浸式阅读（简悦）
 1. https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/related
+## 补充
+1. 图标生成：https://appiconizer.com/
