@@ -44,7 +44,7 @@ var AutoClipper =function () {
     $singlePageInnerWidget.remove();
     preProcess.init();
   };
-
+  // 简书
   hostMap['jianshu'] = function () {
     tools.openMessage('当前为简书页面');
     $('body').css('padding-top','0!important');
