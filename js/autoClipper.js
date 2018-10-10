@@ -24,11 +24,11 @@ var AutoClipper =function () {
     $main.width('100%');
     blogContentBox.addClass('rt-clipper-save-hook');
     // 删除无用的空白
+    $('#csdn-toolbar').remove();
     blogContentBox.nextAll().remove();
     $main.nextAll().remove();
     preProcess.init();
   };
-
   // 伯乐在线
   hostMap['jobbole'] = function () {
     tools.openMessage('当前为伯乐在线页面');
@@ -44,6 +44,21 @@ var AutoClipper =function () {
     $singlePageInnerWidget.remove();
     preProcess.init();
   };
+
+  hostMap['jianshu'] = function () {
+    tools.openMessage('当前为简书页面');
+    $('body').css('padding-top','0!important');
+    var $article = $('.article');
+    var $post = $article.parent();
+    var $noteBottom = $('.note-bottom');
+    $article.addClass('rt-clipper-save-hook');
+    $('nav').remove();
+    $noteBottom.remove();
+    $article.nextAll().remove();
+    $post.siblings().remove();
+    preProcess.init();
+  };
+
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
    * zhihu.com这样的字符串无法作为关键字
@@ -57,12 +72,23 @@ var AutoClipper =function () {
       return key.replace(/_/g,'.')
     }
   }
+  // 增加一些每个页面都需要的内容
+  function addCommonContent() {
+    // 将原始页面增加到页面中
+    $('body').prepend(
+      '<p class="rt-clipper-save-hook rt-clipper-pdf-href" >原始页面：' +
+        '<a  href="'+document.location.href+'">'+document.location.href+'</a>' +
+      '</p>'
+    )
+  }
+
   function autoClipper() {
     var hostname = document.location.hostname;
     for(var key in hostMap){
       var convertKey = keyConvert(key);
       if(hostname.indexOf(convertKey) !== -1){
         hostMap[key]();
+        addCommonContent();
         return;
       }
     }
