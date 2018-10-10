@@ -28,6 +28,22 @@ var AutoClipper =function () {
     $main.nextAll().remove();
     preProcess.init();
   };
+
+  // 伯乐在线
+  hostMap['jobbole'] = function () {
+    tools.openMessage('当前为伯乐在线页面');
+    var $wrapper = $('#wrapper');
+    var $grid8 = $wrapper.find(".grid-8").eq(0);
+    var $content = $grid8.children().eq(0);
+    $content.addClass('rt-clipper-save-hook');
+    $grid8.nextAll().remove();
+    $content.nextAll().remove();
+    $grid8.css({"position": "absolute","top": "40px","left": "5%","width": "90%"});
+    var $singlePageInnerWidget = $('#single-page-inner-widget');
+    $singlePageInnerWidget.next().remove();
+    $singlePageInnerWidget.remove();
+    preProcess.init();
+  };
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
    * zhihu.com这样的字符串无法作为关键字
