@@ -1,7 +1,14 @@
 # 巴扎黑clipper
-1. 自动剪辑功能，可以获取知乎专栏、伯乐在线、csdn、简书正文
+1. 自动剪辑功能，可以获取
+    - 知乎专栏、伯乐在线、csdn、简书正文
+    - 掘金（juejin.im）
 2. 可以启用页面编辑
 3. 可以对需要的内容进行剪辑
+# 优势（相比于简悦）
+1. 样式粗糙（哈哈哈）
+2. 简悦进入沉浸式阅读，不能对文字进行删除（可能我未找到）
+1. 沉浸阅读，使用如下划重点插件，报错（懒得找其他插件了）
+1. 沉浸阅读，ctrl+p保存pdf，是图片-。-（可能保存方式有误）
 ## Super Simple Highlighter
 1. 为了在剪辑上方便的绘制重点,随便找了一个
 2. https://chrome.google.com/webstore/detail/super-simple-highlighter/hhlhjgianpocpoppaiihmlpgcoehlhio?utm_source=chrome-ntp-icon
@@ -10,3 +17,25 @@
 1. https://chrome.google.com/webstore/detail/simpread-reader-view/ijllcpnolfcooahcekpamkbidhejabll/related
 ## 补充
 1. 图标生成：https://appiconizer.com/
+## 使用说明
+1. 看到能自动剪辑的网站，直接点击自动剪辑，会直接形成正文
+    - 此时图标badge会显示“汪汪汪”，3秒后小时
+1. 可以启用编辑，对不需要的文字进行删除
+2. 对于不用自动剪辑的网站，只能使用剪辑功能自己圈选内容，然后点击处理已剪辑内容
+    - 可能样式会比较丑
+## 文件说明
+1. pop.js
+    - 毋庸置疑的是弹窗js
+1. autoClipper.js
+    - 自动剪辑的js，如需要新的网站进行自动剪辑，直接在hostMap添加剪辑办法就行
+1. main.js
+    - 统一处理pop中点击事件，request.action与pop按钮的id对应；
+    - 因为pop.js传递过来的是e.target.id
+1. pageHelper.js
+    - 主要用于处理鼠标与键盘的操作(添加到具体页面中的)
+1. preProcess.js
+    - pageHelper前的预处理
+1. tools.js
+    - 提示信息的js
+## 参考
+1. 小茗同学的博客园：https://www.cnblogs.com/liuxianan/p/chrome-plugin-develop.html
