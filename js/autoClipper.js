@@ -1,3 +1,11 @@
+/**
+ * 自动剪辑功能实现
+ * 1. hostMap存储处理自动剪辑的网站
+ *    - 对需要保留的元素增加，rt-clipper-save-hook样式
+ *    - 为了美观，利用remove删除无用信息
+ * 2. 如需要网每个剪辑页面增加新内容，可以往addCommonContent函数中书写
+ * @constructor
+ */
 var AutoClipper =function () {
   var hostMap = {};
   var preProcess = new PreProcess();
@@ -58,6 +66,20 @@ var AutoClipper =function () {
     $post.siblings().remove();
     preProcess.init();
   };
+  // 掘金
+  hostMap['juejin_im'] = function(){
+    tools.openMessage('当前为掘金页面');
+    var $article = $('article');
+    var $articelparent = $article.parent();
+    var $main = $('main');
+    $article.addClass('rt-clipper-save-hook');
+    $('.author-info-block').remove();
+    $main.siblings().remove();
+    $article.siblings().remove();
+    $articelparent.siblings().remove();
+    $articelparent.css({width: "90%", margin: "0 auto"});
+    preProcess.init();
+  }
 
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
@@ -74,7 +96,7 @@ var AutoClipper =function () {
   }
   // 增加一些每个页面都需要的内容
   function addCommonContent() {
-    // 将原始页面增加到页面中
+    // 将原始页面链接增加到页面中
     $('body').prepend(
       '<p class="rt-clipper-save-hook rt-clipper-pdf-href" >原始页面：' +
         '<a  href="'+document.location.href+'">'+document.location.href+'</a>' +
