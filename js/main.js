@@ -1,4 +1,15 @@
 (function () {
+  $(document).on('keypress',function (e) {
+    if (e.shiftKey && e.keyCode === 67) {
+      tools.openMessage('启动页面可编辑');
+      document.body.contentEditable = true;
+    }
+    if (e.shiftKey && e.keyCode === 86) {
+      tools.openMessage('禁用页面可编辑','error');
+      document.body.contentEditable = false;
+    }
+  });
+
   var pageHelper = undefined;
   chrome.runtime.onMessage.addListener(
     function (request) {
