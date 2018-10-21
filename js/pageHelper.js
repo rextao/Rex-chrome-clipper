@@ -122,9 +122,4 @@ var PageHelper = function () {
     $document.off('mouseover',mouseOverHandler);
     $document.off('click',clickHandler);
   }
-
-
-
-
-
 };
