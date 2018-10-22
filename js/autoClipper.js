@@ -85,7 +85,27 @@ var AutoClipper =function () {
     $articelparent.siblings().remove();
     $articelparent.css({width: "90%", margin: "0 auto"});
     preProcess.init();
-  }
+  };
+  // 思否：https://segmentfault.com/*
+  hostMap['segmentfault'] = function () {
+    tools.openMessage('当前为思否页面');
+    var $main = $('.main');
+    var $h1 = $main.find('h1');
+    var $article = $('.article');
+    var $nav = $('.global-nav');
+    var $footer = $('#footer');
+    var $breadcrumb = $('.breadcrumb');
+    $main.addClass('rt-clipper-save-hook');
+    $main.siblings().remove();
+    $h1.siblings().remove();
+    $article.nextAll().remove();
+    $nav.remove();
+    $breadcrumb.remove();
+    $footer.remove();
+    $article.css('margin-top','0');
+    $article.parent().css('width','100%');
+    preProcess.init();
+  };
 
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
