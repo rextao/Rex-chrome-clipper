@@ -7,9 +7,13 @@
         .popup{
             width: 180px;
         }
-        .popup > p button{
+        .popup > p.col-2 button{
             display: inline-block;
             width: 48%;
+        }
+        .popup > p button{
+            display: inline-block;
+            width: 100%;
         }
         #preProcess, #autoClipper{
             width: 100%;
@@ -19,29 +23,25 @@
 <body>
 <div class="popup" id="popup">
     <p>
-        <button id="startKeyCut">启用快捷键</button>
-        <button id="destoryKeyCut">禁用快捷键</button>
-    </p>
-    <p>
-        <span>shift+c=>启用可编辑</span>
-        <span>shift+v=>启用可编辑</span>
-    </p>
-    <p>
         <!--直接获取主流博客网站-->
-        <button id="autoClipper">自动剪辑</button>
+        <button id="autoClipper">自动剪辑(shift+x)</button>
     </p>
-    <p>
+    <p class="col-2">
         <!--利用document.body.contentEditable配置页面可编辑-->
         <button id="startContentEdit">启用可编辑</button>
         <button id="destoryContentEdit">禁用可编辑</button>
     </p>
-    <p>
+    <p >
         <!--未使用checkbox，popup是一个页面关闭后无法保留状态，为简便-->
         <!--未使用background.html-->
-        <button id="startClip">启用剪辑</button>
-        <button id="destoryClip">禁用剪辑</button>
+        <button id="startClip">启用剪辑(shift+c)</button>
+        <button id="destoryClip">禁用剪辑(shift+v)</button>
     </p>
     <p><button id="preProcess">处理已剪辑内容</button></p>
+    <p class="col-2">
+        <button id="startKeyCut">启用快捷键</button>
+        <button id="destoryKeyCut">禁用快捷键</button>
+    </p>
 </div>
 <script src="lib/jquery.3.3.1.min.js"></script>
 <script src="js/pop.min.js"></script>

@@ -87,6 +87,24 @@ var PageHelper = function () {
     $target.addClass('rt-clipper-save-hook');
     createSaveBox();
   };
+
+  var keyBoardMap = function (e) {
+    // shift+c
+    if (e.shiftKey && e.keyCode === 67) {
+      tools.openMessage('启动页面可编辑');
+      document.body.contentEditable = true;
+    }
+    // shift+v
+    if (e.shiftKey && e.keyCode === 86) {
+      tools.openMessage('禁用页面可编辑','error');
+      document.body.contentEditable = false;
+    }
+    // shift+x,快捷键启动页面自动剪辑
+    if (e.shiftKey && e.keyCode === 88) {
+      var autoClipper = new AutoClipper();
+      autoClipper.init();
+    }
+  };
   /**
    * 点击某个元素后，在当前元素上覆盖灰层
    */
@@ -121,5 +139,14 @@ var PageHelper = function () {
   this.destroy = function () {
     $document.off('mouseover',mouseOverHandler);
     $document.off('click',clickHandler);
-  }
+  };
+
+  this.initKeyBoardMap = function () {
+    $document.on('keypress',keyBoardMap);
+  };
+
+  this.destroyKeyBoardMap = function () {
+    $document.off('keypress',keyBoardMap);
+  };
+
 };

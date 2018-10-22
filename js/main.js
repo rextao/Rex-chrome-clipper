@@ -1,16 +1,7 @@
 (function () {
-  $(document).on('keypress',function (e) {
-    if (e.shiftKey && e.keyCode === 67) {
-      tools.openMessage('启动页面可编辑');
-      document.body.contentEditable = true;
-    }
-    if (e.shiftKey && e.keyCode === 86) {
-      tools.openMessage('禁用页面可编辑','error');
-      document.body.contentEditable = false;
-    }
-  });
-
-  var pageHelper = undefined;
+  var pageHelper = new PageHelper();
+  // 自动启动快捷键
+  pageHelper.initKeyBoardMap();
   chrome.runtime.onMessage.addListener(
     function (request) {
       if (request.action === 'autoClipper' ){
@@ -41,7 +32,15 @@
       if (request.action === 'preProcess') {
         var preProcess = new PreProcess();
         preProcess.init();
-
+      }
+      if (request.action === 'startKeyCut') {
+        tools.openMessage('启用快捷键','error');
+        pageHelper = new PageHelper();
+        pageHelper.initKeyBoardMap();
+      }
+      if (request.action === 'destoryKeyCut') {
+        tools.openMessage('禁用快捷键','error');
+        pageHelper.destroyKeyBoardMap();
       }
     }
   );
