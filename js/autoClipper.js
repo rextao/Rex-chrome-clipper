@@ -3,6 +3,7 @@
  * 1. hostMap存储处理自动剪辑的网站
  *    - 对需要保留的元素增加，rt-clipper-save-hook样式
  *    - 为了美观，利用remove删除无用信息
+ *    - hostMap中用_表示.  keyConvert函数进行了转换
  * 2. 如需要网每个剪辑页面增加新内容，可以往addCommonContent函数中书写
  * @constructor
  */
@@ -37,12 +38,15 @@ var AutoClipper =function () {
     $main.nextAll().remove();
     preProcess.init();
   };
-  // 伯乐在线
-  hostMap['jobbole'] = function () {
+  // 伯乐在线http://blog.jobbole.com/*
+  hostMap['blog_jobbole'] = function () {
     tools.openMessage('当前为伯乐在线页面');
     var $wrapper = $('#wrapper');
     var $grid8 = $wrapper.find(".grid-8").eq(0);
     var $content = $grid8.children().eq(0);
+    var $copyRightArea = $('.copyright-area');
+    // 版权说明删除
+    $copyRightArea.remove();
     $content.addClass('rt-clipper-save-hook');
     $grid8.nextAll().remove();
     $content.nextAll().remove();
@@ -52,14 +56,16 @@ var AutoClipper =function () {
     $singlePageInnerWidget.remove();
     preProcess.init();
   };
-  // 简书
+  // 简书https://www.jianshu.com/
   hostMap['jianshu'] = function () {
     tools.openMessage('当前为简书页面');
     $('body').css('padding-top','0!important');
     var $article = $('.article');
     var $post = $article.parent();
     var $noteBottom = $('.note-bottom');
+    var $author = $('.author');
     $article.addClass('rt-clipper-save-hook');
+    $author.remove();
     $('nav').remove();
     $noteBottom.remove();
     $article.nextAll().remove();
