@@ -12,7 +12,8 @@
  */
 var PageHelper = function () {
   var $document = $(document);
-  var $body = $('body');
+  // 是否初始化
+  var state = false;
   var _border ={
     "height" : undefined,
     "width" : undefined,
@@ -30,6 +31,29 @@ var PageHelper = function () {
   function isRtClipperSave(e) {
     return !!($(e.target).hasClass('rt-clipper-save') || $(e.target).parent().hasClass('rt-clipper-save'));
   }
+  /**
+   * 点击某个元素后，在当前元素上覆盖灰层
+   */
+  function createSaveBox() {
+    var $div = $(document.createElement('div'));
+    $div.css(_border);
+    $div.data('_node',_border.node);
+    $div.addClass('rt-clipper-save');
+    $div.append('<span class="rt-close-hook">x</span>');
+    $('body').append($div);
+  }
+  /**
+   * body上append，一个上右下左的4个div，用于构建rect
+   * 随着鼠标move，方块移动
+   */
+  var appendMoveBorder = function() {
+    var html = '<div class="rt-clipper-border rt_top_hook"></div>' +
+               '<div class="rt-clipper-border rt_right_hook"></div>' +
+               '<div class="rt-clipper-border rt_bottom_hook"></div>' +
+               '<div class="rt-clipper-border rt_left_hook"></div>';
+    $('body').append(html);
+  };
+
   var mouseOverHandler = function (e) {
     var $target = $(e.target);
     // 如是遮罩层rt-clipper-save，则不再生成边界
@@ -87,17 +111,17 @@ var PageHelper = function () {
     $target.addClass('rt-clipper-save-hook');
     createSaveBox();
   };
-
-  var keyBoardMap = function (e) {
+  // 键盘监听
+  var keyBoardHandler = function (e) {
     // shift+c
     if (e.shiftKey && e.keyCode === 67) {
       tools.openMessage('启动页面可编辑');
-      document.body.contentEditable = true;
+      PageHelper.prototype.enableContentEditable();
     }
     // shift+v
     if (e.shiftKey && e.keyCode === 86) {
       tools.openMessage('禁用页面可编辑','error');
-      document.body.contentEditable = false;
+      PageHelper.prototype.disableContentEditable();
     }
     // shift+x,快捷键启动页面自动剪辑
     if (e.shiftKey && e.keyCode === 88) {
@@ -105,31 +129,9 @@ var PageHelper = function () {
       autoClipper.init();
     }
   };
-  /**
-   * 点击某个元素后，在当前元素上覆盖灰层
-   */
-  function createSaveBox() {
-    var $div = $(document.createElement('div'));
-    $div.css(_border);
-    $div.data('_node',_border.node);
-    $div.addClass('rt-clipper-save');
-    $div.append('<span class="rt-close-hook">x</span>');
-    $body.append($div);
-  }
-
-  /**
-   * body上append，一个上右下左的4个div，用于构建rect
-   * 随着鼠标move，方块移动
-   */
-  var appendMoveBorder = function() {
-    var html = '<div class="rt-clipper-border rt_top_hook"></div>' +
-               '<div class="rt-clipper-border rt_right_hook"></div>' +
-               '<div class="rt-clipper-border rt_bottom_hook"></div>' +
-               '<div class="rt-clipper-border rt_left_hook"></div>';
-    $body.append(html);
-  };
 
   this.init = function () {
+    this.state = true;
     // 一个上右下左的4个div，用于构建rect
     appendMoveBorder();
     $document.on('mouseover',mouseOverHandler);
@@ -137,16 +139,26 @@ var PageHelper = function () {
   };
 
   this.destroy = function () {
+    this.state = false;
     $document.off('mouseover',mouseOverHandler);
     $document.off('click',clickHandler);
   };
 
+  /**
+   * 初始化与禁用监听键盘事件
+   */
   this.initKeyBoardMap = function () {
-    $document.on('keypress',keyBoardMap);
+    $document.on('keypress',keyBoardHandler);
   };
 
   this.destroyKeyBoardMap = function () {
-    $document.off('keypress',keyBoardMap);
+    $document.off('keypress',keyBoardHandler);
   };
 
+};
+PageHelper.prototype.enableContentEditable = function () {
+  document.body.contentEditable = true;
+};
+PageHelper.prototype.disableContentEditable = function () {
+  document.body.contentEditable = false;
 };

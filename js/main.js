@@ -10,16 +10,15 @@
       }
       if (request.action === 'startContentEdit' ){
         tools.openMessage('启动页面可编辑');
-        document.body.contentEditable = true;
+        pageHelper.enableContentEditable();
       }
       if (request.action === 'destoryContentEdit' ){
         tools.openMessage('禁用页面可编辑','error');
-        document.body.contentEditable = false;
+        pageHelper.disableContentEditable();
       }
       if (request.action === 'startClip' ) {
-        if(!pageHelper){
+        if(!pageHelper.state){
           tools.openMessage('巴扎黑Clipper启动');
-          pageHelper = new PageHelper();
           pageHelper.init();
         }else {
           tools.openMessage('已经启动了！','error');
@@ -35,7 +34,6 @@
       }
       if (request.action === 'startKeyCut') {
         tools.openMessage('启用快捷键','error');
-        pageHelper = new PageHelper();
         pageHelper.initKeyBoardMap();
       }
       if (request.action === 'destoryKeyCut') {
