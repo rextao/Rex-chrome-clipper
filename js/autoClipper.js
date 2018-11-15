@@ -38,8 +38,8 @@ var AutoClipper =function () {
     $main.nextAll().remove();
     preProcess.init();
   };
-  // 伯乐在线http://blog.jobbole.com/*
-  hostMap['blog_jobbole'] = function () {
+  // 伯乐在线http://blog.jobbole.com/*，http://web.jobbole.com/*
+  hostMap['jobbole'] = function () {
     tools.openMessage('当前为伯乐在线页面');
     var $wrapper = $('#wrapper');
     var $grid8 = $wrapper.find(".grid-8").eq(0);
