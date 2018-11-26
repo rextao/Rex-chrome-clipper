@@ -7,6 +7,7 @@
     - 简书正文:https://www.jianshu.com/*
     - 掘金:https://juejin.im/*
     - 思否：https://segmentfault.com/*
+    - cnblogs：https://www.cnblogs.com/*
 2. 可编辑功能（利用：document.body.contentEditable = true;）
 3. 剪辑功能
     - 可以选择指定的div，删除未选择的

@@ -106,6 +106,22 @@ var AutoClipper =function () {
     $article.parent().css('width','100%');
     preProcess.init();
   };
+  // cnblogs:https://www.cnblogs.com/
+  hostMap['cnblogs'] = function (){
+    tools.openMessage('当前为cnblogs页面');
+    var $main = $('#mainContent');
+    var $header = $('#header');
+    $main.addClass('rt-clipper-save-hook');
+    $main.siblings().remove();
+    $main.css('margin','10px');
+    $header.remove();
+    $('#MySignature').remove();
+    $('#blog_post_info_block').remove();
+    $('#blog-comments-placeholder').remove();
+    $('#comment_form').remove();
+    $('.postDesc').remove();
+    preProcess.init();
+  };
 
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
@@ -143,6 +159,10 @@ var AutoClipper =function () {
     tools.openMessage('似乎未剪辑成功','error');
   }
   this.init = function () {
+    if($('.rt-clipper-pdf-href').length !== 0) {
+      tools.openMessage('页面已剪辑过');
+      return;
+    }
     autoClipper();
   }
 };
