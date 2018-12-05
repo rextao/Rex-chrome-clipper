@@ -122,7 +122,17 @@ var AutoClipper =function () {
     $('.postDesc').remove();
     preProcess.init();
   };
-
+  // w3cplus :https://www.w3cplus.com/*
+  hostMap['w3cplus'] = function () {
+    tools.openMessage('当前为w3cplus页面');
+    var $main = $('.main-wrap');
+    $main.addClass('rt-clipper-save-hook');
+    $main.siblings().remove();
+    $main.css({'width':'95%','margin':'0 auto'});
+    $('.region-sidebar-second').remove();
+    $('#footer-col,#node_footer,#node_bottom').remove();
+    preProcess.init();
+  };
   /**
    * 将类似 zhihu_com 转换为 zhihu.com
    * zhihu.com这样的字符串无法作为关键字
